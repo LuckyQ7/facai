@@ -49,14 +49,14 @@
 <body>
   <div class="lucky" id="lucky">
     <ul class="box">
-      <li class="glow-text" v-for="(item,index) in list" :key="item.number">
+      <li class="glow-text" v-for="(item,index) in list" :key="item">
         <div class="number">{{item.number}}</div>
       </li>
     </ul>
-    <button v-prevent-re-click @click="handleClear">
+    <button @click="handleClear">
       <span class="btn-text">清除</span>
     </button>
-    <button v-prevent-re-click @click="handleLucky">
+    <button @click="handleLucky">
       <span class="btn-text">发财</span>
     </button>
   </div>
@@ -143,8 +143,7 @@
 
                 filledCount++; // 增加已填充计数
               }
-            }
-            // 如果所有区域都有数字了，开始随机填充剩余位置
+            }// 如果所有区域都有数字了，开始随机填充剩余位置
             else {
               do {
                 newNumber = this.formatNumber(this.getRandomInt(1, 33));
@@ -154,9 +153,11 @@
             }
           } else if (emptyIndex === 6) {
             // 第7个数是01-16之间
+
             const newNumber = this.formatNumber(this.getRandomInt(1, 16));
+
             this.$set(this.list, emptyIndex, { number: newNumber });
-            console.log(this.list)
+
             this.sortList(this.list)
           }
 
@@ -173,6 +174,7 @@
 
         // 将排序后的数组与第七项合并
         sortedList.splice(6, 0, fixedItem);
+
         return this.list = sortedList;
       }
 
