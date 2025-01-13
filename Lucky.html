@@ -1,81 +1,71 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
-    />
-    <title>恭喜发财</title>
 
-    <link
-      rel="stylesheet"
-      href="css/reset.css"
-      media="screen"
-      title="no title"
-    />
-    <link
-      rel="stylesheet"
-      href="css/invoices.css"
-      media="screen"
-      title="no title"
-    />
-    <!-- <link rel="stylesheet" href="css/vant.min.css" media="screen" title="no title" /> -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <title>恭喜发财</title>
 
-    <script src="js/flexible.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/vue.min.js"></script>
-    <script src="js/vant.min.js"></script>
-    <script src="js/util.js"></script>
-    <script src="js/babel.min.js"></script>
+  <link rel="stylesheet" href="css/reset.css" media="screen" title="no title" />
+  <link rel="stylesheet" href="css/invoices.css" media="screen" title="no title" />
+  <!-- <link rel="stylesheet" href="css/vant.min.css" media="screen" title="no title" /> -->
 
-    <style>
-      .number {
-        animation: rotate 0.3s linear 1;
+  <script src="js/flexible.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/vue.min.js"></script>
+  <script src="js/vant.min.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/babel.min.js"></script>
+
+  <style>
+    .number {
+      animation: rotate 0.3s linear 1;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
       }
 
-      @keyframes rotate {
-        from {
-          transform: translateY(30px);
-          opacity: 0;
-        }
-
-        50% {
-          transform: translateY(-10px);
-          opacity: 1;
-        }
-
-        to {
-          transform: translateY(0px);
-          opacity: 1;
-        }
+      50% {
+        transform: translateY(-10px);
+        opacity: 1;
       }
 
-      body {
-        background-image: url("bg.webp");
+      to {
+        transform: translateY(0px);
+        opacity: 1;
       }
-    </style>
-  </head>
+    }
 
-  <body>
-    <div class="lucky" id="lucky">
-      <ul class="box">
-        <li class="glow-text" v-for="(item,index) in list" :key="item.number">
-          <div class="number">{{item.number}}</div>
-        </li>
-      </ul>
-      <button v-prevent-re-click @click="handleClear">
-        <span class="btn-text">清除</span>
-      </button>
-      <button v-prevent-re-click @click="handleLucky">
-        <span class="btn-text">发财</span>
-      </button>
-    </div>
+    body {
+      background-image: url("bg.webp");
+    }
+  </style>
+</head>
 
-    <video autoplay muted loop>
-      <source src="" type="video/mp4" />
-    </video>
-  </body>
+<body>
+  <div class="lucky" id="lucky">
+    <ul class="box">
+      <li class="glow-text" v-for="(item,index) in list" :key="item.number">
+        <div class="number">{{item.number}}</div>
+      </li>
+    </ul>
+    <button v-prevent-re-click @click="handleClear">
+      <span class="btn-text">清除</span>
+    </button>
+    <button v-prevent-re-click @click="handleLucky">
+      <span class="btn-text">发财</span>
+    </button>
+  </div>
+
+  <video autoplay muted loop>
+    <source src="" type="video/mp4" />
+  </video>
+</body>
+
 </html>
 <script>
   var Vm = new Vue({
@@ -102,7 +92,7 @@
     created() {
       this.list = Array.from({ length: 7 }, (v, k) => ({ number: 0 }));
     },
-    mounted() {},
+    mounted() { },
     methods: {
       handleClear() {
         this.list = Array.from({ length: 7 }, (v, k) => ({ number: 0 }));
@@ -120,58 +110,72 @@
         const ranges = [
           { min: 1, max: 11, filled: false },
           { min: 12, max: 22, filled: false },
-          { min: 23, max: 33, filled: false },
+          { min: 23, max: 33, filled: false }
         ];
 
-        // 找到下一个需要填充随机数的位置
+        let filledCount = 0;
+
+        // 找到下一个需要填充随机数的位置 
         const emptyIndex = this.list.findIndex((item) => !item.number);
 
         if (emptyIndex !== -1) {
           // 如果还有空位
           if (emptyIndex < 6) {
-            // 前6个数必须确保每个区域至少一个数字
             let newNumber;
 
-            // 找一个未覆盖区域进行填充
-            const unfilledRanges = ranges.filter((range) => !range.filled);
+            // 在第一轮前，确保每个区域中都有一个数字
+            if (filledCount < 3) {
+              const unfilledRanges = ranges.filter(range => !range.filled);
 
-            if (unfilledRanges.length > 0) {
-              // 随机选择一个未覆盖的区域
-              const randomRange =
-                unfilledRanges[this.getRandomInt(0, unfilledRanges.length - 1)];
-              do {
-                newNumber = this.formatNumber(
-                  this.getRandomInt(randomRange.min, randomRange.max),
-                );
-              } while (this.list.some((item) => item.number === newNumber));
+              if (unfilledRanges.length > 0) {
+                const randomRange = unfilledRanges[this.getRandomInt(0, unfilledRanges.length - 1)];
 
-              // 设置对应空位的数据
-              this.$set(this.list, emptyIndex, { number: newNumber });
+                do {
+                  newNumber = this.formatNumber(this.getRandomInt(randomRange.min, randomRange.max));
+                } while (this.list.some((item) => item.number === newNumber));
 
-              // 标记区域已填充
-              const rangeIndex = ranges.findIndex(
-                (range) =>
-                  range.min === randomRange.min &&
-                  range.max === randomRange.max,
-              );
-              ranges[rangeIndex].filled = true;
-            } else {
-              // 如果所有区域都已经覆盖，可以随机填充剩下的空位
+                // 设置对应空位的数据
+                this.$set(this.list, emptyIndex, { number: newNumber });
+
+                // 标记该区域已填充
+                const rangeIndex = ranges.findIndex((range) => range.min === randomRange.min && range.max === randomRange.max);
+                ranges[rangeIndex].filled = true;
+
+                filledCount++; // 增加已填充计数
+              }
+            }
+            // 如果所有区域都有数字了，开始随机填充剩余位置
+            else {
               do {
                 newNumber = this.formatNumber(this.getRandomInt(1, 33));
               } while (this.list.some((item) => item.number === newNumber));
+
               this.$set(this.list, emptyIndex, { number: newNumber });
             }
           } else if (emptyIndex === 6) {
             // 第7个数是01-16之间
             const newNumber = this.formatNumber(this.getRandomInt(1, 16));
             this.$set(this.list, emptyIndex, { number: newNumber });
+            console.log(this.list)
+            this.sortList(this.list)
           }
+
         } else {
           // 如果所有方块已填充完成，提示用户
           // alert("随机数已满！");
         }
       },
+      sortList(list) {
+        const fixedItem = list[6]; // 保持第七项不变
+        const sortedList = list
+          .filter((item, index) => index !== 6) // 去除第七项
+          .sort((a, b) => parseInt(a.number) - parseInt(b.number)); // 按照number大小排序
+
+        // 将排序后的数组与第七项合并
+        sortedList.splice(6, 0, fixedItem);
+        return this.list = sortedList;
+      }
+
     },
   });
 </script>
