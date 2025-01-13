@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
+    />
+    <title>恭喜发财</title>
+
+    <link
+      rel="stylesheet"
+      href="css/reset.css"
+      media="screen"
+      title="no title"
+    />
+    <link
+      rel="stylesheet"
+      href="css/invoices.css"
+      media="screen"
+      title="no title"
+    />
+    <!-- <link rel="stylesheet" href="css/vant.min.css" media="screen" title="no title" /> -->
+
+    <script src="js/flexible.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/vant.min.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/babel.min.js"></script>
+
+    <style>
+      .number {
+        animation: rotate 0.3s linear 1;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+
+        50% {
+          transform: translateY(-10px);
+          opacity: 1;
+        }
+
+        to {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+
+      body {
+        background-image: url("bg.webp");
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="lucky" id="lucky">
+      <ul class="box">
+        <li class="glow-text" v-for="(item,index) in list" :key="item.number">
+          <div class="number">{{item.number}}</div>
+        </li>
+      </ul>
+      <button v-prevent-re-click @click="handleClear">
+        <span class="btn-text">清除</span>
+      </button>
+      <button v-prevent-re-click @click="handleLucky">
+        <span class="btn-text">发财</span>
+      </button>
+    </div>
+
+    <video autoplay muted loop>
+      <source src="" type="video/mp4" />
+    </video>
+  </body>
+</html>
+<script>
+  var Vm = new Vue({
+    el: "#lucky",
+    data: {
+      list: [],
+    },
+    directives: {
+      "prevent-re-click": {
+        bind(el, binding) {
+          el.addEventListener("click", () => {
+            if (!el.disabled) {
+              el.disabled = true;
+              setTimeout(() => {
+                el.disabled = false;
+              }, binding.value || 200);
+            }
+          });
+        },
+      },
+    },
+    computed: {},
+    watch: {},
+    created() {
+      this.list = Array.from({ length: 7 }, (v, k) => ({ number: 0 }));
+    },
+    mounted() {},
+    methods: {
+      handleClear() {
+        this.list = Array.from({ length: 7 }, (v, k) => ({ number: 0 }));
+      },
+      // 生成指定范围的随机整数
+      getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      },
+      // 格式化数字为两位（如01, 02）
+      formatNumber(num) {
+        return num < 10 ? `0${num}` : `${num}`;
+      },
+      handleLucky() {
+        // 找到下一个需要填充随机数的位置
+        const emptyIndex = this.list.findIndex((item) => !item.number);
+
+        if (emptyIndex !== -1) {
+          // 如果还有空位，生成随机数
+          if (emptyIndex < 6) {
+            // 前6个数是01-33之间且不能重复
+            let newNumber;
+            do {
+              newNumber = this.formatNumber(this.getRandomInt(1, 33));
+            } while (this.list.some((item) => item.number === newNumber));
+
+            // 设置对应空位的数据
+            this.$set(this.list, emptyIndex, { number: newNumber });
+          } else if (emptyIndex === 6) {
+            // 第7个数是01-16之间
+            const newNumber = this.formatNumber(this.getRandomInt(1, 16));
+            this.$set(this.list, emptyIndex, { number: newNumber });
+          }
+        } else {
+          // 如果所有方块已填充完成，提示用户
+          // alert("随机数已满！");
+        }
+      },
+    },
+  });
+</script>

@@ -1,0 +1,291 @@
+@baseFontSize: 750; //基于视觉稿横屏尺寸/10得出的基准font-size
+
+.rem(@name, @px) {
+  @{name}: (@px / @baseFontSize) * 10rem;
+}
+
+.fontSize(@px) {
+  font-size: (@px / @baseFontSize) * 10rem;
+}
+
+.longRem(@name, @a, @b, @c, @d) {
+  @{name}: (@a / @baseFontSize) * 10rem (@b / @baseFontSize) * 10rem
+    (@c / @baseFontSize) * 10rem (@d / @baseFontSize) * 10rem;
+}
+
+.borderWidth(@name, @a, @color) {
+  @{name}: (@a / @baseFontSize) * 10rem solid @color;
+}
+
+//金额字体
+@font-face {
+  font-family: number; //自定义字体名称
+  src: url(number.ttf);
+}
+
+[v-cloak] {
+  display: none;
+}
+
+html {
+  margin: 0 auto;
+  // background-color: #f7f8fa;
+}
+.pay {
+  width: 10rem;
+  // min-height: 100vh;
+
+  .amount {
+    font-size: 0.96rem;
+    color: #000000;
+    text-align: center;
+    font-weight: 700;
+    margin: 1.7067rem auto 0 auto;
+    .symbol {
+      font-size: 0.6667rem;
+    }
+  }
+  .title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5067rem;
+    box-sizing: border-box;
+    padding: 0 0.6267rem 0 0.4667rem;
+    .left {
+      font-size: 0.4267rem;
+      color: #666666;
+      font-weight: 500;
+    }
+    .right {
+      font-size: 0.32rem;
+      color: #333333;
+      text-align: right;
+      font-weight: 400;
+    }
+  }
+  .channel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 0.24rem;
+    width: 9.4667rem;
+    height: 1.5733rem;
+    margin: 0.2rem auto 0 auto;
+    padding: 0 0.3333rem;
+    box-sizing: border-box;
+    .box {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .logo {
+        display: block;
+        width: 0.64rem;
+        height: 0.64rem;
+      }
+      .name {
+        font-size: 0.4rem;
+        color: #333333;
+        font-weight: 500;
+        margin-left: 0.2533rem;
+      }
+    }
+    .icon {
+      display: block;
+      width: 0.4rem;
+      height: 0.4rem;
+    }
+  }
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 1.8533rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #ffffff;
+    box-shadow: 0rem 0.08rem 0.2533rem 0rem rgba(0, 0, 0, 0.5);
+
+    .confirm_pay {
+      width: 8.5333rem;
+      height: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #d7d7d7;
+      border-radius: 0.16rem;
+      font-size: 0.4267rem;
+      color: #ffffff;
+      text-align: center;
+      font-weight: 400;
+      border: none;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #3970e3;
+      border-radius: 0.16rem;
+      width: 8.5333rem;
+      height: 1.2rem;
+      font-size: 0.4267rem;
+      color: #ffffff;
+      text-align: center;
+      font-weight: 400;
+    }
+  }
+}
+.authentication {
+  width: 100%;
+
+  .line {
+    width: 100%;
+    height: 0.2667rem;
+    background-color: #f9f9f9;
+  }
+  .title {
+    font-size: 0.4267rem;
+    color: #000000;
+    font-weight: 400;
+    box-sizing: border-box;
+    padding: 0.7467rem 0 0 0.4667rem;
+  }
+
+  .input-box {
+    width: 9.0667rem;
+    display: flex;
+    margin: 0.8rem auto 0 auto;
+    box-sizing: border-box;
+    // padding: 0 0.4667rem 0.3067rem 0.4667rem;
+    padding-bottom: 0.3067rem;
+    border-bottom: 0.0133rem solid #dcdcdc;
+    input {
+      flex: 1;
+      height: 0.5333rem;
+      font-size: 0.3733rem;
+      border: none;
+    }
+    input[type="tel"] {
+      border: none;
+      outline: none;
+    }
+    button {
+      height: 0.6rem;
+      font-size: 0.3733rem;
+      color: #4bd214;
+      border-radius: 4px;
+      border: 0.0133rem solid #73ce42;
+      border-radius: 0.0933rem;
+      padding: 0 0.0667rem;
+    }
+    button:disabled {
+      cursor: not-allowed;
+      border: none;
+    }
+  }
+  .btn-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.56rem auto 0 auto;
+  }
+  .confirm-button {
+    width: 9.2rem;
+    height: 1.32rem;
+    background-color: #73ce42;
+    color: #ffffff;
+    font-size: 0.48rem;
+    border: none;
+    border-radius: 0.66rem;
+  }
+}
+.lucky {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .glow-text {
+    font-size: .3333rem;
+    font-weight: bold;
+    color: #ffd700; /* 金黄色 */
+    text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 15px #ffa500,
+      0 0 20px #ffa500, 0 0 25px #ff4500;
+  }
+  .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.6667rem;
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 0.8rem;
+      height: 0.8rem;
+      border: 0.0133rem solid #d5dcde;
+      background-color: #000000;
+    }
+
+    li:not(:last-child) {
+      border-right: none;
+    }
+  }
+
+  button {
+    margin-top: 0.6667rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    position: relative;
+    content: "";
+    width: 4rem;
+    height: 0.8rem;
+    background: #cbbd00;
+    border-radius: 0.56rem;
+    transition: 0.5s;
+    // box-shadow: 0 0 10px rgba(0, 194, 203, 0.5);
+  }
+  button .btn-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    // padding: 14px 45px;
+    font-size: 25px;
+    color: #e0ffff;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    background: rgba(0, 73, 88, 0.05);
+    backdrop-filter: blur(15px);
+    cursor: pointer;
+    z-index: 1;
+    transition: 0.2s;
+  }
+  // button::before {
+  //   content: "";
+  //   position: absolute;
+  //   left: 50%;
+  //   transform: translateX(-50%);
+  //   bottom: -5px;
+  //   width: 25%;
+  //   height: 10px;
+  //   background: #00c2cb;
+  //   border-radius: 10px;
+  //   transition: 0.5s;
+  //   box-shadow: 0 0 10px rgba(0, 194, 203, 0.5);
+  // }
+  // button:hover::before {
+  //   bottom: 0;
+  //   height: 40%;
+  //   width: 90%;
+  //   border-radius: 30px;
+  //   transition-delay: 0.5s;
+  // }
+}

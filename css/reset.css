@@ -1,0 +1,137 @@
+/*清除外边距*/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, figure, /*结构元素*/
+dl, dt, dd, ul, ol, li, /*列表元素*/
+fieldset, lengend, button,  textarea, /*表单元素*/
+th, td, /*表格元素*/
+pre /*文本格式元素*/ {
+  margin: 0;
+}
+
+/*清除ios下点击响应的背景色*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div,
+li,
+a,
+figure,
+button,
+textarea,
+i {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased; /*使页面上的字体抗锯齿,使用后字体看起来会更清晰舒服。*/
+}
+
+/*清除内边距*/
+ul,
+ol,
+menu,
+button,
+th,
+td {
+  padding: 0;
+}
+
+/*重置列表元素*/
+ul,
+ol {
+  list-style: none;
+}
+
+/*清除button, input, textarea默认样式*/
+button,
+textarea {
+  background: none;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+textarea {
+  resize: none;
+}
+
+/*将字体扶正*/
+address,
+cite,
+dfn,
+em,
+var,
+i {
+  font-style: normal;
+}
+
+/*清下划线*/
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+/*鼠标略过a标签，显示下划线*/
+a:hover {
+  /*text-decoration: underline;*/
+}
+
+img {
+  display: block;
+  width: 100%;
+  border: none;
+  font-size: 0;
+}
+
+header,
+content,
+footer {
+  display: block;
+}
+span {
+  display: inline-block;
+}
+
+/*清除h1~h6的默认样式*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+
+html,
+body {
+  font-size: medium;
+  line-height: 1;
+}
+
+/*清浮动*/
+.clear:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+}
+.clear-hide {
+  overflow: hidden;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clear-bg:focus {
+  -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+}
+.clear-bg:-webkit-autofill,
+.clear-bg:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+  background-color: #fff;
+  transition: background-color 50000s ease-in-out 0s;
+  -webkit-transition-delay: 99999s;
+  -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+}
