@@ -319,26 +319,12 @@ function ajaxpost(url, data, isLoading, successfn, errorfn) {
   console.log("发送", data);
   // var url = url.charAt(0) === "/" ? url.substring(1) : url;
   // console.log(url);
-  // 查询订单列表数据
-  // http://10.0.13.28:9010/huizhifu/qianzhihe/qxhList/selectQxhOrderList
-  // 查询订单详情数据
-  // http://10.0.13.28:9010/huizhifu/qianzhihe/qxhList/selectQxhOrderDetails
-  // 查询订单取消
-  // http://10.0.13.28:9010/huizhifu/qianzhihe/qxhList/qxhCancelOrder
-  // 查询订单删除
-  // http://10.0.13.28:9010/huizhifu/qianzhihe/qxhList/qxhDeleteOrder
 
-  // http://10.0.13.29:9010/huizhifu/qianzhihe
-  // 10.0.13.26 永兴
-  // 10.0.13.28 冯京
-  // 10.0.13.29 何成
-  //http://10.0.13.21:9010/huizhifu/qianzhihe 吕培
-  //http://10.0.13.30:9010/qianzhihe/ 荣耀
 
   $.ajax({
     type: "POST",
     data: data,
-    url: "http://10.0.13.21:9010/huizhifu/qianzhihe" + url,
+    url: "" + url,
     dataType: "json",
     beforeSend: function () {
       if (isLoading) {
